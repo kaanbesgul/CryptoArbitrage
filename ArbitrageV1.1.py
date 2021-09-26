@@ -1,0 +1,197 @@
+import json
+import requests
+import threading
+from collections import OrderedDict
+
+#add coin here symbol:name
+coins={
+    "BTC":"bitcoin",
+    "ETH":"ethereum",
+    "ADA":"cardano",
+    "BNB":"binancecoin",
+    "XRP":"ripple",
+    "SOL":"solana",
+    "DOT":"polkadot",
+    "DOGE":"dogecoin",
+    "AVAX":"avalanche",    
+    "UNI":"uniswap",
+    "LUNA":"terra",
+    "LINK":"chainlink",
+    "LTC":"litecoin",
+    "NEO":"neo",
+    "TRX":"tron",
+    "IOTA":"iota",
+    "SXP":"swipe",
+    
+}
+keyorder=[]
+for i in coins.values():
+    keyorder.append(i)
+
+binance=[]
+bitfinex=[]
+bithumb=[]
+coinbase=[]
+huobi=[]
+kraken=[]
+kucoin=[]
+
+#add coins without coinbase to arrays
+for i in coins.keys():
+    bin=i+"USDT"
+    bitf="t"+i+"USD"
+    bithkuco=i+"-USDT"
+    huobkrak=i.lower()+"usdt"
+
+    binance.append(bin)
+    bitfinex.append(bitf)
+    bithumb.append(bithkuco)
+    huobi.append(huobkrak)
+    kraken.append(huobkrak)
+    kucoin.append(bithkuco)
+
+#add coins to coinbase
+for i in coins.values():
+    coinbase.append(i)
+
+
+exchanges={
+    "binance":
+        {"url":"https://www.binance.com/api/v3/depth?symbol={}&limit=1",
+          "currency":binance},
+    "bitfinex":
+        {"url":"https://api-pub.bitfinex.com/v2/tickers?symbols={}",
+          "currency":bitfinex},
+    "bithumb":
+        {"url":"https://global-api.bithumb.pro/market/data/ticker?symbol={}&type=CUSTOM&limit=1&sort=DESC",
+          "currency":bithumb},
+    "coinbase":
+        {"url":"https://www.coinbase.com/api/v2/assets/prices/{}?base=USDT",
+          "currency":coinbase},
+    "huobi":
+        {"url":"https://api.huobi.pro/market/depth?symbol={}&type=step1",
+          "currency":huobi},
+    "kraken":
+        {"url":"https://api.cryptowat.ch/markets/kraken/{}/orderbook",
+          "currency":kraken},
+    "kucoin":
+        {"url":"https://trade.kucoin.com/_api/order-book/orderbook/level2?symbol={}&limit=1&lang=tr_TR",
+          "currency":kucoin}}
+
+binanceS={}
+bitfinexS={}
+bithumbS={}
+coinbaseS={}
+huobiS={}
+krakenS={}
+kucoinS={}
+
+prices={}
+
+def checkprice(url,currency):
+
+    if url==exchanges['binance']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json:
+                binanceS[currency] = float(site_json['bids'][0][0])
+            else:
+                binanceS[currency] = None
+    elif url==exchanges['bitfinex']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json:
+                bitfinexS[currency] = float(site_json[0][1])
+
+            else:
+                bitfinexS[currency] = None
+    elif url==exchanges['bithumb']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json['info']:
+                bithumbS[currency] = float(site_json['info'][0]['c'])
+            else:
+                bithumbS[currency] = None
+    elif url==exchanges['coinbase']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json:
+                coinbaseS[currency] = round(float(site_json['data']['prices']['latest']),5)
+        else:
+            coinbaseS[currency] = None
+    elif url==exchanges['huobi']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json['status'] == 'ok':
+                huobiS[currency] = float(site_json['tick']['bids'][0][0])
+            else:
+                huobiS[currency] = None
+    elif url==exchanges['kraken']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json:
+                krakenS[currency] = float(site_json['result']['asks'][0][0])
+        else:
+            krakenS[currency] = None
+    elif url==exchanges['kucoin']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if site_json['data']['bids'] == None:
+                kucoinS[currency] = None
+            else:
+                kucoinS[currency] = float(site_json['data']['bids'][0][0])
+    else:
+        print("wrong url")
+
+def threadd(url,list):
+    threads = []
+    for _ in range(len(list)):
+        t = threading.Thread(target=checkprice, args=[url,list[_]])
+        t.start()
+        threads.append(t)
+
+    for thread in threads:
+        thread.join()
+
+def readd():
+    with open("price.json","r") as f:
+        t=f.read()
+        print(t)
+
+def run(exchange):
+    for _ in exchange:
+        threadd(exchange[_]['url'],exchange[_]['currency'])
+    prices['binance'] = binanceS
+    prices['bitfinex'] = bitfinexS
+    prices['bithumb'] = bithumbS
+    prices['coinbase'] = coinbaseS
+    prices['huobi'] = huobiS
+    prices['kraken'] = krakenS
+    prices['kucoin'] = kucoinS
+
+    for i in prices:
+        for y in list(prices[i]):
+            for z in coins.keys():
+                if z in y.upper() and i != "coinbase":
+                    prices[i][coins[z]] = prices[i][y]
+                    del prices[i][y]
+    
+    dict2={}
+    for y in prices:
+        dene=sorted(prices[y].items(), key=lambda i:keyorder.index(i[0]))
+        odict=OrderedDict(dene)
+        dict2[y]=odict
+
+    j = json.dumps(dict2)
+    with open("price.json", "w+") as f:
+        f.write(j)
+    readd()
+    run(exchange)
+run(exchanges)
