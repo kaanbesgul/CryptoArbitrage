@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap');
+
+.content-table{
+    width: 99.9%;
+    border-collapse: collapse;
+    font-size: 1em;
+    box-shadow: 0 0 20px rgba(0, 0,0, 0.3);
+}
+.content-table thead tr{
+    background-color: #d1ffdd;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+.content-table thead tr th button {
+    margin: 10px 0;
+    border: none;
+    color: white;
+    background-color:#143d59;
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 0 #f9e506;
+    transition: ease-out 0.5s;
+    outline: none;
+}
+.navbarr{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 20px;
+}
+.content-table thead tr th button:hover {
+    box-shadow: inset 100px 0 0 0 #f9e506;
+    cursor: pointer;
+    color: black;
+}
+thead tr th{
+    padding-top: 15px;
+}
+thead tr th span{
+    display: block;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.content-table tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+}
+tbody tr td{
+    border-right: 1px solid black;
+    text-align: center;
+}
+tbody tr {
+    margin: 50px 0;
+}
+.back{
+    background: linear-gradient(104.35deg,#e3f2ff 0,#f8f8f8 30.73%,#d6ffe0 72.4%,#d1ffdd 100%);
+}
+.careful{
+    padding: 20px;
+    font-size: 35px;
+}
+.main-div{
+    min-height: 600px;
+    font-size: 35px;
+}
+.btn2{
+    font-size: 25px !important;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    background-color:#00ff00;
+    overflow: hidden;
+    border: none;
+    outline: none !important;
+    transition: 0.2s ;
+}
+.btn2:hover{
+    cursor: pointer;
+    color:white !important;
+    background: #00FF00;
+    box-shadow: 0 0 10px #00FF00,0 0 40px #00FF00,0 0 8px #00FF00;
+}
+.second-parag{
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 25px;
+}
+.third-parag{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 35px;
+}
+.third-parag a:hover{
+    text-decoration: none;
+}
+.donate{
+    font-size: 30px;
+}
+footer{
+
+    font-family: 'Gemunu Libre', sans-serif;
+}
+footer a{
+    color: white;
+}
+footer a:hover{
+    color: yellowgreen;
+    text-decoration: none;
+}
+.donate{
+    font-family: 'Gemunu Libre', sans-serif;
+    background: linear-gradient(104.35deg,#FFE333 0,#FFBB33 30.73%,#FF8F33 72.4%,#FF5733 100%);
+    font-size: 20px;
+}
+.donate button:hover{
+    cursor: pointer;
+}
+.donate button{
+    outline: none;
+    background: none;
+    border:none;
+}
+.ref{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 35px;
+}
+.ref img{
+    width: 50px;
+    height: 50px;
+}

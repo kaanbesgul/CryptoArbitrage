@@ -64,11 +64,11 @@ $(document).ready(function(){
         }   
     });
     var max =Math.max(...array);
+    console.log(array.indexOf(max))
     var min =Math.min(...array);
     var profit=((max-min)*100)/min;
     $(element).find(".profit").html("% "+profit.toFixed(3));     
 })})
-
-setTimeout(run, 2000);
+setTimeout(run,2000);
 }
 run();            
