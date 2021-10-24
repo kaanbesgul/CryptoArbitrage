@@ -10,4 +10,5 @@
         <thead id="arbitrage-head"></thead>
         <tbody id="arbitrage"></tbody>
     </table>
+    
 <?php include("footer.php") ?>
