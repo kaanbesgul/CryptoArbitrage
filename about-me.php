@@ -1,6 +1,9 @@
 <?php include("header.php") ?>
 
-<div class="container-fluid">Firstly thanks for visiting my website.I'm Kaan and i want to improve myself in the field of software.
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+        Firstly thanks for visiting my website.I'm Kaan and i want to improve myself in the field of software.
     During the pandemic i started to take an interest in economics.
     I started to think of projects where I could realize these two passions at the same time.
     Then i found that idea and search other crypto arbitrage web sites.
@@ -9,6 +12,8 @@
     Although the project has no future, this can remain a website I developed for myself.
     I think I've learned a lot since I started the project.
     I use Python,HTML,CSS,Bootstrap4,Javascript and JQuery.
+        </div>
+    </div>
     
     
 </div>
