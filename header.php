@@ -45,13 +45,13 @@
           <a class="dropdown-item" href="triangularArbitrage.php">TRIANGULAR ARBITRAGE</a>
         </div>
         <li class="nav-item">
-          <a class="nav-link" href="donate.php">DONATE AND REFERRAL LINKS</a>
+          <a class="nav-link" href="generaltips.php">GENERAL INFORMATION</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="about-me.php">ABOUT ME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="generaltips.php">GENERAL INFORMATION</a>
+          <a class="nav-link" href="donate.php">DONATE AND REFERRAL LINKS</a>
         </li>
     </div>
   </nav>

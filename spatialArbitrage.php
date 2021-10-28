@@ -3,7 +3,7 @@
     <thead id="arbitrage-head"></thead>
     <tbody id="arbitrage"></tbody>
 </table>
-<script src="scr.js"></script>
+<script src="spatial.js"></script>
 
 <script>
     function hideshow(e){
