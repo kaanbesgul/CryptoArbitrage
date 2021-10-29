@@ -18,7 +18,7 @@ newcurrency={
     "BRL":["BTC","ETH","ADA","SOL","BNB","SHIB","AXS","XRP","DOT","DOGE","LTC","ENJ","CHZ","LINK","BTT","MATIC","CAKE","AVAX"],
     "EUR":["BTC","ETH","SHIB","SOL","LUNA","ADA","BNB","DOT","XRP","DOGE","VET","LTC","MATIC","LINK","SXP","ENJ","AVAX","HOT","BTT","CHZ","RUNE","GRT","ETC","UNI"],
     "GBP":["BTC","ETH","SOL","ADA","XRP","BNB","DOT","DOGE","LINK","VET","ENJ","LTC","MATIC","SXP","CAKE","RUNE","CHZ","ETC"],
-    "RUB":["BTC","ETH","WAVES","BNB","ADA","XRP","LTC","DOGE","SOL","DOT","ARPA","MATIC"],
+    "RUB":["BTC","ETH","BNB","ADA","XRP","LTC","DOGE","SOL","DOT","ARPA","MATIC"],
     "TRY":["BTC","ETH","SHIB","ARPA","SOL","AVAX","DOGE","HOT","ADA","GRT","CHZ","BTT","DOT","BNB","SXP","XRP","VET"]
 }
 allcurrency=list(set(newcurrency['AUD']+newcurrency['BIDR']+newcurrency['BRL']+newcurrency['EUR']+newcurrency['GBP']+newcurrency['RUB']+newcurrency['TRY']))
@@ -94,7 +94,7 @@ def run():
     for i in dict2:
         for y in dict2[i].items():
             if i =="AUD":
-                dict3[i][y[0]]= y[1]*currencys["AUDUSDT"]
+                dict3[i][y[0]] = y[1] * currencys["AUDUSDT"]
             elif i =="BIDR":
                 dict3[i][y[0]] = y[1] / currencys["USDTBIDR"]
             elif i =="BRL":
