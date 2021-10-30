@@ -25,8 +25,7 @@
                 <span class="text-danger">2-Manuel Coin Searching:</span> Investors will be able to see arbitrage opportunities in the coin they want. <br>
                 <span class="text-danger">3-Triangular arbitrage in other exchanges:</span> Triangular arbitrage is just available in Binance for now but i will build it for other exchanges.<br>
                 <span class="text-danger">4-Show trading volume in tables:</span>I'm trying to show market volumes to prevent users from losing money<br>
-                <span class="text-danger">5-I Have To Edit For Python File:</span>I have to pull the coin list in order of marketcap and try to avoid hardcoding<br>
-                <span class="text-danger">6-Triangular Arbitrage Bot In Binance:</span>I try to built bot in python for triangular arbitrage<br>                
+                <span class="text-danger">5-Triangular Arbitrage Bot In Binance:</span>I try to built bot in python for triangular arbitrage<br>                
             </div>
         </div>
     </div>

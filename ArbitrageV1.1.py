@@ -3,8 +3,6 @@ import requests
 import threading
 from collections import OrderedDict
 
-
-
 def coinmarket():
     marketc = requests.get(
         "https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
@@ -15,12 +13,11 @@ def coinmarket():
     global coins
     coins={}
 
-    for i in range(0, 6):
+    for i in range(0, 50):
         if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
             pass
         else:
-            coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i][
-                'slug']
+            coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
     return coins
 
 coinmarket()
@@ -102,7 +99,7 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if site_json:
+            if 'bids' in site_json:
                 binanceS[currency] = float(site_json['bids'][0][0])
             else:
                 binanceS[currency] = None
@@ -112,7 +109,7 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if site_json:
+            if len(site_json) !=0:
                 bitfinexS[currency] = float(site_json[0][1])
 
             else:
@@ -123,7 +120,7 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if site_json['info']:
+            if len(site_json['info']) > 0:
                 bithumbS[currency] = float(site_json['info'][0]['c'])
             else:
                 bithumbS[currency] = None
@@ -133,10 +130,11 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if site_json:
-                coinbaseS[currency] = round(float(site_json['data']['prices']['latest']), 5)
-            else:
+            if 'errors' in site_json:
                 coinbaseS[currency] = None
+            else:
+                coinbaseS[currency] = round(float(site_json['data']['prices']['latest']), 5)
+
         else:
             coinbaseS[currency] = None
     elif url == exchanges['ftx']['url']:
@@ -153,7 +151,7 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if site_json['last']:
+            if 'last' in site_json:
                 gateS[currency] = round(float(site_json['last']), 5)
             else:
                 gateS[currency]=None
