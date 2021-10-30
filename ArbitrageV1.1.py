@@ -5,19 +5,25 @@ from collections import OrderedDict
 
 
 
-marketc=requests.get("https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
+def coinmarket():
+    marketc = requests.get(
+        "https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
 
-marketcap=json.loads(marketc.content)
+    marketcap = json.loads(marketc.content)
 
-stable=["USDT","USDC","BUSD","DAI","UST","TUSD","USDP","FEI","HUSD","WBTC","BTCB",]
-coins={}
+    stable = ["USDT", "USDC", "BUSD", "DAI", "UST", "TUSD", "USDP", "FEI", "HUSD", "WBTC", "BTCB", ]
+    global coins
+    coins={}
 
-for i in range(0,2):
-    if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
-        pass
-    else:
-        coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
+    for i in range(0, 6):
+        if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
+            pass
+        else:
+            coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i][
+                'slug']
+    return coins
 
+coinmarket()
 
 keyorder = []
 for i in coins.values():
