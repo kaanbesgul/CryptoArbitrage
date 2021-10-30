@@ -4,50 +4,20 @@ import threading
 from collections import OrderedDict
 
 
-# add coin here symbol:name
-coins = {
-    "BTC":"bitcoin",
-    "ETH":"ethereum",
-    "BNB":"binancecoin",
-    "ADA":"cardano",
-    "SOL":"solana",
-    "XRP":"ripple",
-    "DOT":"polkadot",
-    "DOGE":"dogecoin",
-    "SHIB":"shibainu",
-    "LUNA":"terra",
-    "UNI":"uniswap",
-    "AVAX":"avalanche",    
-    "LINK":"chainlink",
-    "LTC":"litecoin",
-    "ALGO":"algorand",
-    "MATIC":"polygon",
-    "BCH":"bitcoincash",
-    "VET":"vechain",
-    "XLM":"stellar",
-    "ATOM":"cosmos",
-    "ICP":"internetcomputer",
-    "FTM":"fantom",
-    "AXS":"axieinfinity",
-    "FTT":"ftxtoken",
-    "FIL":"filecoin",
-    "TRX":"tron",
-    "THETA":"theta",
-    "ETC":"ethereumclassic",
-    "NEAR":"nearprotocol",
-    "HBAR":"hedera",
-    "XTZ":"tezos",
-    "EGLD":"elrond",
-    "XMR":"monero",
-    "GRT":"thegraph",
-    "CAKE":"pancakeswap",
-    "EOS":"eos",
-    "AAVE":"aave",
-    "KLAY":"klayton",
-    "FLOW":"flow",
-    "IOTA":"iota",
-    "QNT":"quant"
-}
+
+marketc=requests.get("https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
+
+marketcap=json.loads(marketc.content)
+
+stable=["USDT","USDC","BUSD","DAI","UST","TUSD","USDP","FEI","HUSD","WBTC","BTCB",]
+coins={}
+
+for i in range(0,2):
+    if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
+        pass
+    else:
+        coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
+
 
 keyorder = []
 for i in coins.values():
