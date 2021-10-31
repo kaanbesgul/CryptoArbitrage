@@ -3,7 +3,14 @@ import requests
 import threading
 from collections import OrderedDict
 
-def coinmarket():
+
+"""Bittrex=https://global.bittrex.com/v3/markets/BTC-USDT/orderbook?depth=1
+   Crypto.com=https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
+   Okex=https://www.okex.com/priapi/v5/market//mult-tickers?t=1635659891209&instIds=BTC-USDT
+   Wazirx=https://x.wazirx.com/api/v2/trades?market=btcusdt&limit=1
+   Mexc=https://www.mexc.com/api/platform/spot/market/symbol?symbol=BTC_USDT"""
+
+def coinmarket(number):
     marketc = requests.get(
         "https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
 
@@ -13,14 +20,14 @@ def coinmarket():
     global coins
     coins={}
 
-    for i in range(0, 50):
+    for i in range(0, number):
         if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
             pass
         else:
             coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
     return coins
+coinmarket(5)
 
-coinmarket()
 
 keyorder = []
 for i in coins.values():
@@ -29,6 +36,8 @@ for i in coins.values():
 binance = []
 bitfinex = []
 bithumb = []
+bitstampt=[]
+bybit=[]
 coinbase = []
 ftx=[]
 gateio=[]
@@ -47,6 +56,8 @@ for i in coins.keys():
     binance.append(bin)
     bitfinex.append(bitf)
     bithumb.append(bithkuco)
+    bitstampt.append(huobkrak)
+    bybit.append(bin)
     ftx.append(ftxi)
     gateio.append(gate)
     huobi.append(huobkrak)
@@ -66,6 +77,12 @@ exchanges = {
     "bithumb":
         {"url": "https://global-api.bithumb.pro/market/data/ticker?symbol={}&type=CUSTOM&limit=1&sort=DESC",
          "currency": bithumb},
+    "bitstampt":
+        {"url":"https://www.bitstamp.net/api-internal/price-history/{}",
+         "currency":bitstampt},
+    "bybit":
+        {"url":"https://api2.bybit.com/spot/api/quote/v1/multi/kline?symbol={}&exchangeId=301&interval=1h&limit=1",
+         "currency":bybit},
     "coinbase":
         {"url": "https://www.coinbase.com/api/v2/assets/prices/{}?base=USDT",
          "currency": coinbase},
@@ -85,6 +102,8 @@ exchanges = {
 binanceS = {}
 bitfinexS = {}
 bithumbS = {}
+bitstamptS={}
+bybitS={}
 coinbaseS = {}
 ftxS={}
 gateS={}
@@ -126,6 +145,23 @@ def checkprice(url, currency):
                 bithumbS[currency] = None
         else:
             bithumbS[currency] = None
+    elif url == exchanges['bitstampt']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            bitstamptS[currency]=site_json['data']['latest']['price']
+        else:
+            bitstamptS[currency] = None
+    elif url == exchanges['bybit']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if len(site_json['result']) !=0:
+                bybitS[currency] = float(site_json['result'][currency][0]['c'])
+            else:
+                bybitS[currency] = None
+        else:
+            bybitS[currency] = None
     elif url == exchanges['coinbase']['url']:
         r = requests.get(url.format(currency))
         if r.status_code == 200:
@@ -197,11 +233,14 @@ def readd():
 
 
 def run(exchange):
+    coinmarket(50)
     for _ in exchange:
         threadd(exchange[_]['url'], exchange[_]['currency'])
     prices['binance'] = binanceS
     prices['bitfinex'] = bitfinexS
     prices['bithumb'] = bithumbS
+    prices['bitstampt']=bitstamptS
+    prices['bybit'] = bybitS
     prices['coinbase'] = coinbaseS
     prices['ftx']=ftxS
     prices['gate']=gateS
