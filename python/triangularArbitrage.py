@@ -115,7 +115,7 @@ def run():
             else:
                 dict3[y][i]=None
     j = json.dumps(dict3)
-    with open("arbitrage.json", "w+") as f:
+    with open("../arbitrage.json", "w+") as f:
         f.write(j)
     run()
 run()
