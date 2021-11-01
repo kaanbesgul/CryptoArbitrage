@@ -4,6 +4,6 @@
     <thead id="arbitrage-head"></thead>
     <tbody id="arbitrage"></tbody>
 </table>
-<script src="triangular.js"></script>
+<script src="js/triangular.js"></script>
 
 <?php include("footer.php") ?>
