@@ -8,10 +8,10 @@
             There are 3 different types of arbitrage <br> <br>
             1-Spatial arbitrage:This arbitrage involves buy cryptos in one exchange and sell another exchange in a quick time <br>
             2-Convergence arbitrage:This arbitrage involves buy crypto in one exchange and sold short in another exchange till prices get equal <br>
-            3-Triangular arbitrage:This arbitrage a little bit complicated.In triangular arbitrage investor trade on crypto currencies with different foreign currencies.
-            For example investor have an USDT,if investor catch an oppurtunity on TRY-BTC and BTC-GBP pairs,investor should swap money to TRY and buy BTC,after sell on GBP price and lastly swap to GBP-USDT
+            3-Triangular arbitrage:This arbitrage a little bit complicated.In triangular arbitrage investor trade on crypto currencies with different currency pairs.
+            For example investor have an USDT,if investor catch an oppurtunity on ETH-BTC and BTC-BNB pairs,investor should swap money to ETH and buy BTC,after sell BTC on BNB price and lastly swap to BNB-USDT
             <br><br>
-            Triangular arbitrage is one of the most profitable arbitrage type.For now you can do an triangular arbitrage in Binance exchange in this web site but i try to build it for other exchanges 
+            Triangular arbitrage is one of the most profitable arbitrage type.For now you can do an triangular arbitrage in Binance exchange and foreign currencies in this web site.
             <br><br>
             When doing arbitrage you always consider about;
             <br><br>
@@ -24,7 +24,7 @@
             I recommend that all investors,always think twice about the transactions you make and for first time try with small amounts of money.
             <br><br>
             -Trading Volume:I recommend that you always look at the market volumes when doing arbitrage,
-             otherwise you may not be able to sell the crypto you bought.(This generally happen in low cap exchanges) 
+             otherwise you may not be able to sell the crypto you bought.(This generally happen in low cap exchanges,and currencies.) 
             <br> <br>
             <span class="text-danger"><h2>BE CAREFUL</h2></span> 
             <br><br>
@@ -33,7 +33,7 @@
             <br><br>
             -In triangular arbitrage prices changes in a quick time.Investor should realy quick.
             <br><br>
-            -In triangular arbitrage investor convert his money 4 times this mean investor pay for fees 4 times.In Binance investor should consider to profit>0.6
+            -In triangular arbitrage investor convert his money 4 times this mean investor pay fees 4 times.For an advice in Binance investor should consider to profit>0.7
         </div>
     </div>
 </div>

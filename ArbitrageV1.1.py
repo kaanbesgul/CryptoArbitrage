@@ -4,8 +4,7 @@ import threading
 from collections import OrderedDict
 
 
-"""Bittrex=https://global.bittrex.com/v3/markets/BTC-USDT/orderbook?depth=1
-   Crypto.com=https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
+"""Crypto.com=https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
    Okex=https://www.okex.com/priapi/v5/market//mult-tickers?t=1635659891209&instIds=BTC-USDT
    Wazirx=https://x.wazirx.com/api/v2/trades?market=btcusdt&limit=1
    Mexc=https://www.mexc.com/api/platform/spot/market/symbol?symbol=BTC_USDT"""
@@ -37,6 +36,7 @@ binance = []
 bitfinex = []
 bithumb = []
 bitstampt=[]
+bittrex=[]
 bybit=[]
 coinbase = []
 ftx=[]
@@ -57,6 +57,7 @@ for i in coins.keys():
     bitfinex.append(bitf)
     bithumb.append(bithkuco)
     bitstampt.append(huobkrak)
+    bittrex.append(bithkuco)
     bybit.append(bin)
     ftx.append(ftxi)
     gateio.append(gate)
@@ -80,6 +81,9 @@ exchanges = {
     "bitstampt":
         {"url":"https://www.bitstamp.net/api-internal/price-history/{}",
          "currency":bitstampt},
+    "bittrex":
+        {"url":"https://global.bittrex.com/v3/markets/{}/orderbook?depth=1",
+         "currency":bittrex},
     "bybit":
         {"url":"https://api2.bybit.com/spot/api/quote/v1/multi/kline?symbol={}&exchangeId=301&interval=1h&limit=1",
          "currency":bybit},
@@ -103,6 +107,7 @@ binanceS = {}
 bitfinexS = {}
 bithumbS = {}
 bitstamptS={}
+bittrexS={}
 bybitS={}
 coinbaseS = {}
 ftxS={}
@@ -149,9 +154,19 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            bitstamptS[currency]=site_json['data']['latest']['price']
+            bitstamptS[currency]=float(site_json['data']['latest']['price'])
         else:
             bitstamptS[currency] = None
+    elif url == exchanges['bittrex']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if 'bid' in site_json:
+                bittrexS[currency] = float(site_json['bid'][0]['rate'])
+            else:
+                bittrexS[currency] = None
+        else:
+            bittrexS[currency] = None
     elif url == exchanges['bybit']['url']:
         r = requests.get(url.format(currency))
         if r.status_code == 200:
@@ -215,12 +230,13 @@ def checkprice(url, currency):
         print("wrong url")
 
 
-def threadd(url, list):
+def threadd(exchange):
     threads = []
-    for _ in range(len(list)):
-        t = threading.Thread(target=checkprice, args=[url, list[_]])
-        t.start()
-        threads.append(t)
+    for i in exchange:
+        for _ in exchange[i]['currency']:
+            t = threading.Thread(target=checkprice, args=[exchange[i]['url'],_])
+            t.start()
+            threads.append(t)
 
     for thread in threads:
         thread.join()
@@ -234,12 +250,12 @@ def readd():
 
 def run(exchange):
     coinmarket(50)
-    for _ in exchange:
-        threadd(exchange[_]['url'], exchange[_]['currency'])
+    threadd(exchange)
     prices['binance'] = binanceS
     prices['bitfinex'] = bitfinexS
     prices['bithumb'] = bithumbS
     prices['bitstampt']=bitstamptS
+    prices['bittrex']=bittrexS
     prices['bybit'] = bybitS
     prices['coinbase'] = coinbaseS
     prices['ftx']=ftxS

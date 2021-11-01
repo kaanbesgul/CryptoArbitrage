@@ -33,7 +33,7 @@
             <div class="col-12 my-2 text-center">
                 <img src="images/coinbase.png" alt=""> 
                 <span>COINBASE</span>
-                <a href="coinbase.com/join/6Z8D8E?src=ios-link">coinbase.com/join/6Z8D8E?src=ios-link</a>
+                <a href="https://coinbase.com/join/6Z8D8E?src=ios-link">https://coinbase.com/join/6Z8D8E?src=ios-link</a>
             </div>
             <div class="col-12 my-2 text-center">
                 <img src="images/ftx.png" alt=""> 
