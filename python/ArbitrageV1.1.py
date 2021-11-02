@@ -4,10 +4,7 @@ import threading
 from collections import OrderedDict
 
 
-"""Crypto.com=https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
-   Okex=https://www.okex.com/priapi/v5/market//mult-tickers?t=1635659891209&instIds=BTC-USDT
-   Wazirx=https://x.wazirx.com/api/v2/trades?market=btcusdt&limit=1
-   Mexc=https://www.mexc.com/api/platform/spot/market/symbol?symbol=BTC_USDT"""
+"""Mexc=https://www.mexc.com/api/platform/spot/market/symbol?symbol=BTC_USDT"""
 
 def coinmarket(number):
     marketc = requests.get(
@@ -38,17 +35,22 @@ bithumb = []
 bitstampt=[]
 bittrex=[]
 bybit=[]
+cryptocom=[]
 coinbase = []
 ftx=[]
 gateio=[]
 huobi = []
 kucoin = []
+mexc=[]
+okex=[]
+wazirx=[]
 
 # add coins without coinbase to arrays
 for i in coins.keys():
     bin = i + "USDT"
     bitf = "t" + i + "USD"
     bithkuco = i + "-USDT"
+    cryptocomm=i+"_USDT"
     ftxi=i+"/USDT"
     gate=i.lower()+"_usdt"
     huobkrak = i.lower() + "usdt"
@@ -59,10 +61,14 @@ for i in coins.keys():
     bitstampt.append(huobkrak)
     bittrex.append(bithkuco)
     bybit.append(bin)
+    cryptocom.append(cryptocomm)
     ftx.append(ftxi)
     gateio.append(gate)
     huobi.append(huobkrak)
     kucoin.append(bithkuco)
+    mexc.append(cryptocomm)
+    okex.append(bithkuco)
+    wazirx.append(huobkrak)
 
 # add coins to coinbase
 for i in coins.values():
@@ -87,6 +93,9 @@ exchanges = {
     "bybit":
         {"url":"https://api2.bybit.com/spot/api/quote/v1/multi/kline?symbol={}&exchangeId=301&interval=1h&limit=1",
          "currency":bybit},
+    "cryptocom":
+        {"url":"https://api.crypto.com/v2/public/get-ticker?instrument_name={}",
+         "currency":cryptocom},
     "coinbase":
         {"url": "https://www.coinbase.com/api/v2/assets/prices/{}?base=USDT",
          "currency": coinbase},
@@ -101,7 +110,16 @@ exchanges = {
          "currency": huobi},
     "kucoin":
         {"url": "https://trade.kucoin.com/_api/order-book/orderbook/level2?symbol={}&limit=1&lang=tr_TR",
-         "currency": kucoin}}
+         "currency": kucoin},
+    "mexc":
+        {"url":"https://www.mexc.com/api/platform/spot/market/symbol?symbol={}",
+         "currency":mexc},
+    "okex":
+        {"url":"https://www.okex.com/priapi/v5/market//mult-tickers?t=1635659891209&instIds={}",
+         "currency":okex},
+    "wazirx":
+        {"url":"https://x.wazirx.com/api/v2/trades?market={}&limit=1",
+         "currency":wazirx}}
 
 binanceS = {}
 bitfinexS = {}
@@ -109,11 +127,15 @@ bithumbS = {}
 bitstamptS={}
 bittrexS={}
 bybitS={}
+cryptocomS={}
 coinbaseS = {}
 ftxS={}
 gateS={}
 huobiS = {}
 kucoinS = {}
+mexcS={}
+okexS={}
+wazirxS={}
 
 prices = {}
 
@@ -177,6 +199,16 @@ def checkprice(url, currency):
                 bybitS[currency] = None
         else:
             bybitS[currency] = None
+    elif url == exchanges['cryptocom']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if len(site_json['result']['data']) !=0:
+                cryptocomS[currency] = float(site_json['result']['data']['b'])
+            else:
+                cryptocomS[currency] = None
+        else:
+            cryptocomS[currency] = None
     elif url == exchanges['coinbase']['url']:
         r = requests.get(url.format(currency))
         if r.status_code == 200:
@@ -226,6 +258,38 @@ def checkprice(url, currency):
                 kucoinS[currency] = None
             else:
                 kucoinS[currency] = float(site_json['data']['bids'][0][0])
+        else:
+            kucoinS[currency] = None
+    elif url == exchanges['mexc']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if 'data' in site_json:
+                mexcS[currency] = site_json['data']['c']
+            else:
+                mexcS[currency] = None
+        else:
+            mexcS[currency] = None
+    elif url == exchanges['okex']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if len(site_json['data']) !=0:
+                okexS[currency] = float(site_json['data'][0]['last'])
+            else:
+                okexS[currency] = None
+        else:
+            okexS[currency] = None
+    elif url == exchanges['wazirx']['url']:
+        r = requests.get(url.format(currency))
+        if r.status_code == 200:
+            site_json = json.loads(r.content)
+            if type(site_json) is list:
+                wazirxS[currency] = float(site_json[0]['price'])
+            else:
+                wazirxS[currency] = None
+        else:
+            wazirxS[currency] = None
     else:
         print("wrong url")
 
@@ -249,7 +313,6 @@ def readd():
 
 
 def run(exchange):
-    coinmarket(50)
     threadd(exchange)
     prices['binance'] = binanceS
     prices['bitfinex'] = bitfinexS
@@ -257,11 +320,15 @@ def run(exchange):
     prices['bitstampt']=bitstamptS
     prices['bittrex']=bittrexS
     prices['bybit'] = bybitS
+    prices['cryptocom']=cryptocomS
     prices['coinbase'] = coinbaseS
     prices['ftx']=ftxS
     prices['gate']=gateS
     prices['huobi'] = huobiS
     prices['kucoin'] = kucoinS
+    prices['mexc']=mexcS
+    prices['okex']=okexS
+    prices['wazirx']=wazirxS
 
     for i in prices:
         for y in list(prices[i]):
