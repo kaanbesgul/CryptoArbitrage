@@ -3,9 +3,6 @@ import requests
 import threading
 from collections import OrderedDict
 
-
-"""Mexc=https://www.mexc.com/api/platform/spot/market/symbol?symbol=BTC_USDT"""
-
 def coinmarket(number):
     marketc = requests.get(
         "https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
@@ -22,7 +19,7 @@ def coinmarket(number):
         else:
             coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
     return coins
-coinmarket(5)
+coinmarket(20)
 
 
 keyorder = []
@@ -193,8 +190,11 @@ def checkprice(url, currency):
         r = requests.get(url.format(currency))
         if r.status_code == 200:
             site_json = json.loads(r.content)
-            if len(site_json['result']) !=0:
-                bybitS[currency] = float(site_json['result'][currency][0]['c'])
+            if len(site_json['result']) > 0 :
+                if len(site_json['result'][currency]) > 0 :
+                    bybitS[currency] = float(site_json['result'][currency][0]['c'])
+                else:
+                    bybitS[currency] = None
             else:
                 bybitS[currency] = None
         else:
