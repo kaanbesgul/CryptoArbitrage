@@ -19,7 +19,7 @@ def coinmarket(number):
         else:
             coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
     return coins
-coinmarket(20)
+coinmarket(50)
 
 
 keyorder = []
@@ -216,7 +216,7 @@ def checkprice(url, currency):
             if 'errors' in site_json:
                 coinbaseS[currency] = None
             else:
-                coinbaseS[currency] = round(float(site_json['data']['prices']['latest']), 5)
+                coinbaseS[currency] = round(float(site_json['data']['prices']['latest']), 7)
 
         else:
             coinbaseS[currency] = None
@@ -225,7 +225,7 @@ def checkprice(url, currency):
         if r.status_code == 200:
             site_json = json.loads(r.content)
             if site_json['success'] == True:
-                ftxS[currency] = round(float(site_json['result']['bids'][0][0]), 5)
+                ftxS[currency] = round(float(site_json['result']['bids'][0][0]), 7)
             else:
                 ftxS[currency] = None
         else:
@@ -235,7 +235,7 @@ def checkprice(url, currency):
         if r.status_code == 200:
             site_json = json.loads(r.content)
             if 'last' in site_json:
-                gateS[currency] = round(float(site_json['last']), 5)
+                gateS[currency] = round(float(site_json['last']), 7)
             else:
                 gateS[currency]=None
         else:
