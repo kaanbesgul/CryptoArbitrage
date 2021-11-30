@@ -15,6 +15,8 @@ def coinmarket(number):
     for i in range(0, number):
         if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
             pass
+        elif marketcap['data']['cryptoCurrencyMap'][i]['symbol'] == "MIOTA":
+            coins["IOTA"] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
         else:
             coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
     return coins

@@ -16,7 +16,7 @@ $.ajax(
                 counter++;
             }
             thead+="<th><span>% Profit</span></th></tr>";
-            for(var i in data['binance']){
+            for(var i in data['AAX']){
                 var i2 = i.charAt(0).toUpperCase() + i.slice(1);
                 tbody+="<tr class='"+i+"'><td class='coin'>"+i2+"</td>";
 
