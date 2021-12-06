@@ -24,8 +24,7 @@
                 <span class="text-danger">1-Beautify The Page With CSS:</span> This will be an always ongoing phase. <br>
                 <span class="text-danger">2-Manuel Coin Searching:</span> Investors will be able to see arbitrage opportunities in the coin they want. <br>
                 <span class="text-danger">3-Triangular arbitrage in other exchanges:</span> Triangular arbitrage is just available in Binance for now but i will build it for other exchanges.<br>
-                <span class="text-danger">4-Show trading volume in tables:</span>I'm trying to show market volumes to prevent users from losing money.<br>
-                <span class="text-danger">5-Triangular Arbitrage for other currencies:</span>I try to add BNB BTC and ETH pairs.(it may take some time for me to prepare the algorithm for this script,If you want to help you can mail me.)<br>                
+                <span class="text-danger">4-Show trading volume in tables:</span>I'm trying to show market volumes to prevent users from losing money.<br>              
             </div>
         </div>
     </div>

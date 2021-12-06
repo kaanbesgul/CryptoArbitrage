@@ -6,6 +6,7 @@
     width: 99.9%;
     border-collapse: collapse;
     font-size: 1em;
+    overflow:scroll;
     box-shadow: 0 0 20px rgba(0, 0,0, 0.3);
 }
 .content-table thead tr{
@@ -134,4 +135,45 @@ footer a:hover{
 .about-me{
     font-size: 20px;
     font-family: 'Merriweather', serif;
+}
+
+
+
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltips .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltips .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+  
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

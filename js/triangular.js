@@ -1,73 +1,64 @@
-$.ajax(
-    {
-        url:"arbitrage.json",
-        dataType:"json",
-        type:"get",
-        cache:false,success:function(data){
-            var tablehead=document.getElementById("arbitrage-head");
-            var tablebody=document.getElementById("arbitrage");
-            
-            var thead="<tr class='table-head'><th>All pairs in USDT</th>";
-            var tbody="";
-            var counter=1;
-            for(var i in data){
-                var i = i.toUpperCase();
-                thead+="<th><span>"+i+"</span><button onclick='hideshow("+counter+")'>Hide/Show</button></th>";
-                counter++;
-            }
-            thead+="<th><span>% Profit</span></th></tr>";
-            for(var i in data['AUD']){
-                var i2 = i.charAt(0).toUpperCase() + i.slice(1);
-                tbody+="<tr class='"+i+"'><td class='coin'>"+i2+"</td>";
-
-                for(ii in data){
-                    tbody+="<td class='"+ii+"'></td>";
-                }
-                tbody+="<td class='profit'></td></tr>";                    
-            }
-            tablebody.innerHTML=tbody;
-            tablehead.innerHTML=thead;
-        }
-    }
-)
 function run(){
     $.ajax(
-{
-    url:"arbitrage.json",
-    dataType:"json",
-    type:"get",
-    cache:false,
-    success:function(data){
-        for(var _ in data){
-            for(var i in data[_]){
-                var x=document.querySelector("."+i+" "+"."+_);
-                if(data[_][i]){
-                    x.innerHTML=data[_][i]
-                }else{
-                    x.innerHTML="-";
-                }                         
-            }     
+        {
+            url:"triangulararbitrage.json",
+            dataType:"json",
+            type:"get",
+            cache:false,success:function(data){
+                var BNBBTCtablebody=document.getElementById("BNBBTC-arbitrage");
+                var BNBETHtablebody=document.getElementById("BNBETH-arbitrage");
+                var ETHBTCtablebody=document.getElementById("ETHBTC-arbitrage");
+                var text="";
+    
+                for(var i in data['BTCBNB']['BTC']){
+                    var myarr=[]
+                    myarr.push(parseFloat(((data['BTCBNB']['BTC'][i]['price'])*1/(data['BTCBNB']['BNB'][i]['price'])).toFixed(6)))
+                    myarr.push(data['BNBBTC'])
+    
+                    var minn=Math.min(...myarr);
+                    var maxx=Math.max(...myarr);
+                    
+                    var profit=(((maxx-minn)/minn)*100).toFixed(3)
+                    
+                    text+="<tr><td>"+i+"</td><td>"+data['BTCBNB']['BNB'][i]['price']+"</td><td>"+data['BTCBNB']['BNB'][i]['volume']+"</td><td>"+data['BTCBNB']['BTC'][i]['price']+"</td><td>"+data['BTCBNB']['BTC'][i]['volume']+"</td><td>"+((data['BTCBNB']['BTC'][i]['price'])*1/(data['BTCBNB']['BNB'][i]['price'])).toFixed(6)+"</td><td>"+data['BNBBTC']+"</td><td>"+profit+"</td></tr>"
+                }
+                BNBBTCtablebody.innerHTML=text;
+    
+                var text="";
+    
+                for(var i in data['ETHBNB']['ETH']){
+                    var myarr=[]
+                    myarr.push(parseFloat(((data['ETHBNB']['ETH'][i]['price'])*1/(data['ETHBNB']['BNB'][i]['price'])).toFixed(6)))
+                    myarr.push(data['BNBETH'])
+    
+                    var minn=Math.min(...myarr);
+                    var maxx=Math.max(...myarr);
+                    
+                    var profit=(((maxx-minn)/minn)*100).toFixed(3)
+                    
+                    text+="<tr><td>"+i+"</td><td>"+data['ETHBNB']['ETH'][i]['price']+"</td><td>"+data['ETHBNB']['ETH'][i]['volume']+"</td><td>"+data['ETHBNB']['BNB'][i]['price']+"</td><td>"+data['ETHBNB']['BNB'][i]['volume']+"</td><td>"+((data['ETHBNB']['ETH'][i]['price'])*1/(data['ETHBNB']['BNB'][i]['price'])).toFixed(6)+"</td><td>"+data['BNBETH']+"</td><td>"+profit+"</td></tr>"
+                }
+                BNBETHtablebody.innerHTML=text;
+    
+                var text="";
+    
+                for(var i in data['BTCETH']['BTC']){
+                    var myarr=[]
+                    myarr.push(parseFloat(((data['BTCETH']['BTC'][i]['price'])*1/(data['BTCETH']['ETH'][i]['price'])).toFixed(6)))
+                    myarr.push(data['ETHBTC'])
+    
+                    var minn=Math.min(...myarr);
+                    var maxx=Math.max(...myarr);
+                    
+                    var profit=(((maxx-minn)/minn)*100).toFixed(3)
+                    
+                    text+="<tr><td>"+i+"</td><td>"+data['BTCETH']['ETH'][i]['price']+"</td><td>"+data['BTCETH']['ETH'][i]['volume']+"</td><td>"+data['BTCETH']['BTC'][i]['price']+"</td><td>"+data['BTCETH']['BTC'][i]['volume']+"</td><td>"+((data['BTCETH']['BTC'][i]['price'])*1/(data['BTCETH']['ETH'][i]['price'])).toFixed(6)+"</td><td>"+data['ETHBTC']+"</td><td>"+profit+"</td></tr>"
+                }
+                ETHBTCtablebody.innerHTML=text;
+            }
+            
         }
-    }       
-})
-
-$(document).ready(function(){
-    $("tr").not(".table-head").each(function(index,element){
-    var array=[];    
-    $("td",element).not(".profit").not(".coin").not(".invisible").each(function(){
-        var x =$(this).text();
-        if(x== "-"){
-
-        }else{
-            array.push(parseFloat(x))    
-        }   
-    });
-    var max =Math.max(...array);
-    console.log(array.indexOf(max))
-    var min =Math.min(...array);
-    var profit=((max-min)*100)/min;
-    $(element).find(".profit").html("% "+profit.toFixed(3));     
-})})
-setTimeout(run,2000);
+    )
+    setTimeout(run,5000);       
 }
-run();         
+run()
