@@ -42,7 +42,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="spatialArbitrage.php">SPATIAL ARBITRAGE</a>
-          <a class="dropdown-item" href="triangularArbitrage.php">TRIANGULAR ARBITRAGE</a>
+          <a class="dropdown-item" href="triangularArbitrage2.php">TRIANGULAR ARBITRAGE</a>
         </div>
         <li class="nav-item">
           <a class="nav-link" href="generaltips.php">GENERAL INFORMATION</a>

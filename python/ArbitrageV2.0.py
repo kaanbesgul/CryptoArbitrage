@@ -43,7 +43,6 @@ dict={
     "Huobi":"https://api.huobi.pro/market/tickers",
     "Kraken":"https://www.kraken.com/api/internal/cryptowatch/markets/assets?asset=USDT&limit=200&assetName=new",
     "Kucoin":"https://www.kucoin.com/_api/trade-front/market/getSymbol/USDS?lang=tr_TR",
-    "Mexc":"https://www.mexc.com/_next/data/_iEGdZSD6HVuBsPNvRhYS/tr-TR/markets.json",
     "Okex":"https://www.okex.com/priapi/v5/market/mult-cup-tickers?t=1638123712053&ccys=",
     "Wazirx":"https://x.wazirx.com/wazirx-falcon/api/v2.0/crypto_rates"
 }
@@ -63,7 +62,6 @@ dict2={"AAX":{},
        "Huobi":{},
        "Kraken":{},
        "Kucoin":{},
-       "Mexc":{},
        "Okex":{},
        "Wazirx":{}
        }
@@ -205,7 +203,7 @@ def checkprice(url,coinsdict):
                 for i in coinsdict.items():
                     for y in site_json['data']:
                         if y['base'] == i[0]:
-                            dict2['Coinbase'][i[1]] = float(y['latest'])
+                            dict2['Coinbase'][i[1]] = round(float(y['latest']),7)
                             break
                         else:
                             continue
@@ -331,22 +329,6 @@ def checkprice(url,coinsdict):
                 print("Wrong Url")
         else:
             print("Wrong url")
-    elif url == dict['Mexc']:
-        r = requests.post(url)
-        if r.status_code == 200:
-            site_json = json.loads(r.content)
-            if len(site_json['pageProps']) > 0:
-                for i in coinsdict.items():
-                    for y in site_json['pageProps']['spotMarkets']['USDT']:
-                        if i[0] == y['currency']:
-                            dict2['Mexc'][i[1]] = float(y['c'])
-                            break
-                        else:
-                            continue
-            else:
-                print("Wrong Url")
-        else:
-            print("WRONG URL")
     elif url == dict['Okex']:
         for i in coinsdict.items():
             url+=i[0]+","
@@ -373,7 +355,7 @@ def checkprice(url,coinsdict):
             for i in coinsdict.items():
                 for y in site_json:
                     if i[0].lower() == y:
-                        dict2['Wazirx'][i[1]] = float(site_json[y]['usdt'])
+                        dict2['Wazirx'][i[1]] = round(float(site_json[y]['usdt']),7)
                         break
                     else:
                         continue
@@ -396,7 +378,6 @@ dict3={"AAX":{},
        "Huobi":{},
        "Kraken":{},
        "Kucoin":{},
-       "Mexc":{},
        "Okex":{},
        "Wazirx":{}
        }
@@ -414,4 +395,5 @@ def run():
     j = json.dumps(dict3)
     with open("../price.json", "w+") as f:
         f.write(j)
+    run()
 run()

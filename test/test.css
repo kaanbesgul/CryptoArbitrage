@@ -1,0 +1,7 @@
+.table-fixed tbody{
+    height: auto;
+    overflow-x:auto ;
+}
+.table-fixed tr{
+    text-align: center;
+}

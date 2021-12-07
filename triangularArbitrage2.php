@@ -1,7 +1,7 @@
 <?php include('header.php') ?>
 <table id="table" class="w-100">
     <thead id="arbitrage-head">
-        <tr>
+        <tr class="text-center">
             <th class="mx-auto">BTC/BNB arbitrage</th>
             <th class="mx-auto">Coin/BNB</th>
             <th class="mx-auto">BNB Volume</th>
@@ -17,7 +17,7 @@
 
 <table class="w-100 my-5">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th class="mx-auto">BTC/ETH arbitrage</th>
             <th class="mx-auto">Coin/ETH</th>
             <th class="mx-auto">ETH Volume</th>
@@ -33,7 +33,7 @@
 
 <table class="w-100">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th class="mx-auto">ETH/BNB arbitrage</th>
             <th class="mx-auto">Coin/ETH</th>
             <th class="mx-auto">ETH Volume</th>

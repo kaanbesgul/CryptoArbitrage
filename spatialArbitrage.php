@@ -1,5 +1,5 @@
 <?php include("header.php"); ?>
-<table id="table" class="content-table mx-auto">
+<table id="table" class="content-table mx-auto table-striped">
     <thead id="arbitrage-head"></thead>
     <tbody id="arbitrage"></tbody>
 </table>
