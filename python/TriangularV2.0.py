@@ -1,9 +1,8 @@
 import requests
 import json
+import time
 
 url = "https://www.binance.com/bapi/asset/v2/public/asset-service/product/get-products?includeEtf=true"
-r = requests.get(url)
-site_json = json.loads(r.content)
 
 dict={
     "BNBBTC":"",
@@ -24,6 +23,10 @@ dict={
     }
 }
 def run():
+    
+    r = requests.get(url)
+    site_json = json.loads(r.content)
+
     for i in site_json['data']:
         for y in site_json['data']:
             if i['q'] == "BTC" and y['q'] == "BNB" and i['b'] == y['b']:
@@ -57,4 +60,6 @@ def run():
     j = json.dumps(dict)
     with open("../triangulararbitrage.json", "w+") as f:
         f.write(j)
+        time.sleep(7)
+    run()
 run()

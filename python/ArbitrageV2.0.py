@@ -22,10 +22,14 @@ def coinmarket(number):
     return coins
 
 
+
 Bitstampt=""
 Cryptocom=""
 """Digifinex:https://api.digifinex.com/market
-Indoex:https://masternode.indoex.io/getavailablepairs"""
+LBank:https://www.lbank.info/request/tick
+Liquid:https://api.liquid.com/products?with_rate=true
+Indoex:https://masternode.indoex.io/getavailablepairs
+Probit:https://www.probit.com/api/exchange/v1/ticker"""
 
 dict={
     "AAX":"https://api.aax.com/common/v2/market/histTicker?type=spotAll",
@@ -174,7 +178,7 @@ def checkprice(url,coinsdict):
                     newcur=i[0]+"-USDT"
                     for y in site_json:
                         if newcur == y['symbol']:
-                            dict2['Bittrex'][i[1]] = float(y['lastTradeRate'])
+                            dict2['Bittrex'][i[1]] = round(float(y['lastTradeRate']),7)
                             break
                         else:
                             continue

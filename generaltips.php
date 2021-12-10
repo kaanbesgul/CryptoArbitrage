@@ -29,12 +29,14 @@
             <span class="text-danger"><h2>BE CAREFUL</h2></span> 
             <br><br>
             -In spatial arbitrage when investor transfer his/her money in other exchange,investor should be careful about transaction time and transaction fees,i highly recomend to TRC20 or BEP20 Networks.
-            In TRC20 there is 2 dollar fees my usage advice small amount and high frequency transfers is really good for TRC20 
+            In TRC20 there is 1 dollar fees my usage advice small amount and high frequency transfers is really good for TRC20 
+            <br><br>
+            <span class="text-danger">-In spatial arbitrage always make sure the exchanges open to transfer for crypto that you doing arbitrage</span>
             <br><br>
             -In triangular arbitrage prices changes in a quick time.Investor should realy quick.
             <br><br>
             -In triangular arbitrage investor convert his money 4 times this mean investor pay fees 4 times.For an advice in Binance investor should consider to profit>0.7
-            <div>
+            <div> <br> <br>
                 Binance-Malta <br>
                 Bitfinex-Hong Kong <br>
                 Bithumb-South Korea <br>
