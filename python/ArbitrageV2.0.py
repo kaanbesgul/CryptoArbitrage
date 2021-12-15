@@ -127,6 +127,35 @@ def checkprice(url, coinsdict):
         if r.status_code == 200:
             site_json = json.loads(r.content)
             if site_json['data'] != None:
+                for i in site_json['data']:
+                    for y in site_json['data']:
+                        if i['q'] == "BTC" and y['q'] == "BNB" and i['b'] == y['b']:
+                            dict3['BTCBNB'][i['q']][i['b']] = {}
+                            dict3['BTCBNB'][i['q']][i['b']]['price'] = float(i['c'])
+                            dict3['BTCBNB'][i['q']][i['b']]['volume'] = float(i['qv'])
+                            dict3['BTCBNB'][y['q']][y['b']] = {}
+                            dict3['BTCBNB'][y['q']][y['b']]['price'] = float(y['c'])
+                            dict3['BTCBNB'][y['q']][y['b']]['volume'] = float(y['qv'])
+                        elif i['q'] == "ETH" and y['q'] == "BNB" and i['b'] == y['b']:
+                            dict3['ETHBNB'][i['q']][i['b']] = {}
+                            dict3['ETHBNB'][i['q']][i['b']]['price'] = float(i['c'])
+                            dict3['ETHBNB'][i['q']][i['b']]['volume'] = float(i['qv'])
+                            dict3['ETHBNB'][y['q']][y['b']] = {}
+                            dict3['ETHBNB'][y['q']][y['b']]['price'] = float(y['c'])
+                            dict3['ETHBNB'][y['q']][y['b']]['volume'] = float(y['qv'])
+                        elif i['q'] == "BTC" and y['q'] == "ETH" and i['b'] == y['b']:
+                            dict3['BTCETH'][i['q']][i['b']] = {}
+                            dict3['BTCETH'][i['q']][i['b']]['price'] = float(i['c'])
+                            dict3['BTCETH'][i['q']][i['b']]['volume'] = float(i['qv'])
+                            dict3['BTCETH'][y['q']][y['b']] = {}
+                            dict3['BTCETH'][y['q']][y['b']]['price'] = float(y['c'])
+                            dict3['BTCETH'][y['q']][y['b']]['volume'] = float(y['qv'])
+                        elif i['s'] == "BNBBTC":
+                            dict3['BNBBTC'] = float(i['c'])
+                        elif i['s'] == "ETHBTC":
+                            dict3['ETHBTC'] = float(i['c'])
+                        elif i['s'] == "BNBETH":
+                            dict3['BNBETH'] = float(i['c'])
                 for i in coinsdict.items():
                     for y in site_json['data']:
                         if i[0] == y['b'] and y['q'] == "USDT":
@@ -424,8 +453,10 @@ def run():
     coinmarket(50)
     threadd(dict, coins)
     j = json.dumps(dict2)
-    with open("price.json", "w+") as f:
+    with open("../spatialArbitrage.json", "w+") as f:
         f.write(j)
-    print(dict2)
+    j=json.dumps(dict3)
+    with open("../triangulArarbitrage.json","w+") as f:
+        f.write(j)
     run()
 run()

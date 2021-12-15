@@ -1,6 +1,6 @@
 
     $.ajax({
-        url: "price.json",
+        url: "spatialArbitrage.json",
         dataType: "json",
         type: "get",
         cache: false,
@@ -34,7 +34,7 @@
 
 function run() {
     $.ajax({
-        url: "price.json",
+        url: "spatialArbitrage.json",
         dataType: "json",
         type: "get",
         cache: false,

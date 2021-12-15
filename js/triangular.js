@@ -1,7 +1,7 @@
 function run(){
     $.ajax(
         {
-            url:"triangulararbitrage.json",
+            url:"triangulArarbitrage.json",
             dataType:"json",
             type:"get",
             cache:false,success:function(data){
