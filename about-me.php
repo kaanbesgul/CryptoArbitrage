@@ -21,10 +21,11 @@
 
         <h3 class="my-4">My To Do List</h3>
             <div>
-                <span class="text-danger">1-Beautify The Page With CSS:</span> This will be an always ongoing phase. <br>
+                <span class="text-danger">1-Beautify The Page With CSS:</span>I will completely change the style of page <br>
                 <span class="text-danger">2-Manuel Coin Searching:</span> Investors will be able to see arbitrage opportunities in the coin they want. <br>
-                <span class="text-danger">3-Triangular arbitrage in other exchanges:</span> Triangular arbitrage is just available in Binance for now but i will build it for other exchanges.<br>
-                <span class="text-danger">4-Show trading volume in tables:</span>I'm trying to show market volumes to prevent users from losing money.<br>              
+                <span class="text-danger">3-Triangular arbitrage in other exchanges:</span> Triangular arbitrage is just available in Binance for now but i will build it for other exchanges.<br>    
+                <span class="text-danger">4-Searching for Dex:</span>If i can scrap data in DEXes and get prices it will be more profit.I'm still working on this<br>
+                <span class="text-danger">5-Triangular Arbitrage Bot:</span>I will build the triangular arbitrage bot for Binance
             </div>
         </div>
     </div>

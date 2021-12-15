@@ -70,8 +70,23 @@ dict2={"AAX":{},
        "Wazirx":{}
        }
 
-
-
+dict3={
+    "BNBBTC":"",
+    "BNBETH":"",
+    "ETHBTC":"",
+    "BTCBNB":{
+        "BTC":{},
+        "BNB":{}
+    },
+    "BTCETH":{
+        "BTC":{},
+        "ETH":{}
+    },
+    "ETHBNB":{
+        "ETH":{},
+        "BNB":{}
+    }
+}
 def threadd(exchangedict,coinsdict):
     threads = []
     for i in exchangedict.keys():
@@ -95,7 +110,7 @@ def checkprice(url,coinsdict):
                             dict2['AAX'][i[1]]=float(y['close'])
                             break
                         else:
-                            pass
+                            dict2['AAX'][i[1]]=None
             else:
                 print("Wrong URL")
         else:
@@ -111,7 +126,7 @@ def checkprice(url,coinsdict):
                             dict2['Binance'][i[1]]=float(y['c'])
                             break
                         else:
-                            pass
+                            dict2['Binance'][i[1]]=None
             else:
                 print("Wrong URL")
         else:
@@ -128,7 +143,7 @@ def checkprice(url,coinsdict):
                             dict2['Bitfinex'][i[1]] = float(y[3])
                             break
                         else:
-                            continue
+                            dict2['Bitfinex'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -145,7 +160,7 @@ def checkprice(url,coinsdict):
                             dict2['Bithumb'][i[1]] = float(y['c'])
                             break
                         else:
-                            continue
+                            dict2['Bithumb'][i[1]] = None
             else:
                 print("Wrong Url!")
         else:
@@ -162,7 +177,7 @@ def checkprice(url,coinsdict):
                             dict2['Bitmart'][i[1]] = float(y['c'])
                             break
                         else:
-                            continue
+                            dict2['Bitmart'][i[1]] = None
             else:
                 print("Wrong url")
         else:
@@ -181,7 +196,7 @@ def checkprice(url,coinsdict):
                             dict2['Bittrex'][i[1]] = round(float(y['lastTradeRate']),7)
                             break
                         else:
-                            continue
+                            dict2['Bittrex'][i[1]] = None
         else:
             print("Wrong url")
     elif url == dict['Bybit']:
@@ -196,7 +211,7 @@ def checkprice(url,coinsdict):
                             dict2['Bybit'][i[1]] = float(y['last_price'])
                             break
                         else:
-                            continue
+                            dict2['Bybit'][i[1]] = None
         else:
             print("Wrong url")
     elif url == dict['Coinbase']:
@@ -210,7 +225,7 @@ def checkprice(url,coinsdict):
                             dict2['Coinbase'][i[1]] = round(float(y['latest']),7)
                             break
                         else:
-                            continue
+                            dict2['Coinbase'][i[1]] = None
             else:
                 print("Wrong url")
 
@@ -227,7 +242,7 @@ def checkprice(url,coinsdict):
                             dict2['Coinw'][i[1]] = float(y['price'])
                             break
                         else:
-                            continue
+                            dict2['Coinw'][i[1]] = None
             else:
                 print("Wrong url")
         else:
@@ -244,7 +259,7 @@ def checkprice(url,coinsdict):
                             dict2['Ftx'][i[1]] = float(y['last'])
                             break
                         else:
-                            continue
+                            dict2['Ftx'][i[1]] = None
             else:
                 print("Wrong url")
         else:
@@ -261,7 +276,7 @@ def checkprice(url,coinsdict):
                             dict2['Gate'][i[1]] = float(site_json['USDT'][y]['rate'])
                             break
                         else:
-                            continue
+                            dict2['Gate'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -278,7 +293,7 @@ def checkprice(url,coinsdict):
                             dict2['Gokumarket'][i[1]] = float(y['currentPrice'])
                             break
                         else:
-                            continue
+                            dict2['Gokumarket'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -295,7 +310,7 @@ def checkprice(url,coinsdict):
                             dict2['Huobi'][i[1]] = float(y['close'])
                             break
                         else:
-                            continue
+                            dict2['Huobi'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -311,7 +326,7 @@ def checkprice(url,coinsdict):
                             dict2['Kraken'][i[1]] = float(y['price'])
                             break
                         else:
-                            continue
+                            dict2['Kraken'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -328,7 +343,7 @@ def checkprice(url,coinsdict):
                             dict2['Kucoin'][i[1]] = float(y['lastTradedPrice'])
                             break
                         else:
-                            continue
+                            dict2['Kucoin'][i[1]] = None
             else:
                 print("Wrong Url")
         else:
@@ -342,11 +357,11 @@ def checkprice(url,coinsdict):
             if len(site_json['data']) > 0:
                 for i in coinsdict.items():
                     for y in site_json['data']:
-                        if y['ccy'] == i[0]:
+                        if y['ccy'] == i[0] and i[0] != "BNB":
                             dict2['Okex'][i[1]] = float(y['last'])
                             break
                         else:
-                            continue
+                            dict2['Okex'][i[1]] = None
             else:
                 print("wrong url")
 
@@ -362,42 +377,16 @@ def checkprice(url,coinsdict):
                         dict2['Wazirx'][i[1]] = round(float(site_json[y]['usdt']),7)
                         break
                     else:
-                        continue
-
+                        dict2['Wazirx'][i[1]] = None
         else:
             print("WRONG URL")
-
-dict3={"AAX":{},
-       "Binance":{},
-       "Bitfinex":{},
-       "Bithumb":{},
-       "Bitmart":{},
-       "Bittrex":{},
-       "Bybit":{},
-       "Coinbase":{},
-       "Coinw":{},
-       "Ftx":{},
-       "Gate":{},
-       "Gokumarket":{},
-       "Huobi":{},
-       "Kraken":{},
-       "Kucoin":{},
-       "Okex":{},
-       "Wazirx":{}
-       }
-
+            
 def run():
     coinmarket(50)
     threadd(dict,coins)
-
-    for i in coins.items():
-        for y in dict2.keys():
-            if i[1] in dict2[y]:
-                dict3[y][i[1]] = dict2[y][i[1]]
-            else:
-                dict3[y][i[1]] = None
-    j = json.dumps(dict3)
-    with open("../price.json", "w+") as f:
+    j = json.dumps(dict2)
+    with open("price.json", "w+") as f:
         f.write(j)
+    print(dict2)
     run()
 run()
