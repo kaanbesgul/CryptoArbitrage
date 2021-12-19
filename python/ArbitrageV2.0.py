@@ -1,5 +1,6 @@
 import json
 import requests
+import time
 import threading
 
 
@@ -458,5 +459,6 @@ def run():
     j=json.dumps(dict3)
     with open("../triangulArarbitrage.json","w+") as f:
         f.write(j)
+    time.sleep(10)
     run()
 run()

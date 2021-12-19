@@ -25,5 +25,27 @@
         </div>
     </div>
 </footer>
+<script>
+    var tipButton = document.querySelector('.tip-button')
+    tipButton.addEventListener('click', function() {
+  if (typeof web3 === 'undefined') {
+    return renderMessage('You need to install MetaMask to use this feature.  https://metamask.io')
+  }
+
+  var user_address = web3.eth.accounts[0]
+  web3.eth.sendTransaction({
+    to: 0x5B7bb2F5C81C933dA498a9A55268AEB51158bb89,
+    from: user_address,
+    value: web3.toWei('0.01', 'ether'),
+  }, function (err, transactionHash) {
+    if (err) return renderMessage('Oh no!: ' + err.message)
+
+    // If you get a transactionHash, you can assume it was sent,
+    // or if you want to guarantee it was received, you can poll
+    // for that transaction to be mined first.
+    renderMessage('Thanks!')
+  })
+})
+</script>
 </body>
 </html>

@@ -1,13 +1,7 @@
-thead{
-    height: 100px;
+/* Navbar Style Start*/
+
+
+.myclas{
+    min-height: 200vh;
 }
-#BTCBNB thead{
-    background-color:#F0B90B;
-}
-#BTCETH thead{
-    color: white;
-    background-color: #3c3c3d;
-}
-#ETHBNB thead{
-   background-color: #ecf0f1;
-}
+/*Navbar Style End*/

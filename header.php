@@ -29,7 +29,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light navbarr">
     <a class="navbar-brand" href="main.php">CRYPTO ARBITRAGE</a>
-    <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <button class="navbar-toggler bg-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,6 +55,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="donate.php">DONATE AND REFERRAL LINKS</a>
+        </li>
+        <li>
+          <div class="tip-button"></div>
         </li>
     </div>
   </nav>
