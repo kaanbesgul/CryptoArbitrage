@@ -1,0 +1,44 @@
+/* Div outside the table */
+.tableFixHead{
+    overflow-x: scroll;
+}
+/* Table Header */
+#table #arbitrage-head{
+    background-color: aqua;
+}
+ /* First Coloumn */
+ #table .headcol {
+    min-height: 25px;
+    position: absolute;
+    width: 120px !important;
+    left: 0;
+    top: auto;
+    border-top-width: 1px;
+    margin-top: -1px;
+  }
+/* Second Coloumn */
+#table ._Bitcoin{
+    padding-left: 20px;
+}
+/* Table Coloumns */
+#table tr{
+    border: 1px solid black;
+    height: 25px;
+}
+/* Table Head */
+#table th{
+    min-width: 120px;
+}
+/* Table All Cells */
+#table td{ 
+    border: 1px solid black;
+}
+
+.but{
+    background-color: white;
+    float: right;
+    border: none;
+    margin: 5px 5px ;
+    width: 15px;
+    height: 15px;
+}

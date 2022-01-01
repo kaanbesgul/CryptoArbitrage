@@ -32,7 +32,7 @@
     <tbody id="BNBBTC-arbitrage"></tbody>
 </table>
 
-<table id="BTCETH" class="w-100 my-5">
+<table id="BTCETH" class="w-100 my-5 table-striped">
     <thead>
         <tr class="text-center">
             <th class="mx-auto">ETH/BTC arbitrage</th>
@@ -48,7 +48,7 @@
     <tbody id="ETHBTC-arbitrage"></tbody>
 </table>
 
-<table id="ETHBNB" class="w-100">
+<table id="ETHBNB" class="w-100 table-striped">
     <thead>
         <tr class="text-center">
             <th class="mx-auto">BNB/ETH arbitrage</th>

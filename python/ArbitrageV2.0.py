@@ -1,12 +1,11 @@
 import json
-import requests
 import time
+import requests
 import threading
 
 
 def coinmarket(number):
-    marketc = requests.get(
-        "https://api.coinmarketcap.com/data-api/v3/map/all?listing_status=active,untracked&exchangeAux=is_active,status&cryptoAux=is_active,status&start=1&limit=10000")
+    marketc = requests.get("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start=1&limit="+str(number))
 
     marketcap = json.loads(marketc.content)
 
@@ -14,16 +13,13 @@ def coinmarket(number):
     global coins
     coins = {}
 
-    for i in range(0, number):
-        if marketcap['data']['cryptoCurrencyMap'][i]['symbol'] in stable:
+    for i in marketcap['data']['cryptoCurrencyList']:
+        if i['symbol'] in stable:
             pass
-        elif marketcap['data']['cryptoCurrencyMap'][i]['symbol'] == "MIOTA":
-            coins["IOTA"] = marketcap['data']['cryptoCurrencyMap'][i]['slug']
+        elif i['symbol'] == "MIOTA":
+            coins["IOTA"] =i['slug']
         else:
-            coins[marketcap['data']['cryptoCurrencyMap'][i]['symbol']] = marketcap['data']['cryptoCurrencyMap'][i][
-                'slug']
-    return coins
-
+            coins[i['symbol']] =i['slug']
 
 Bitstampt = ""
 Cryptocom = ""
@@ -393,8 +389,11 @@ def checkprice(url, coinsdict):
                 for i in coinsdict.items():
                     for y in site_json:
                         if y['quoted_currency'] == "USDT" and i[0] ==y['base_currency']:
-                            dict2['Liquid'][i[1]] = float(y['average_price'])
-                            break
+                            try:
+                                dict2['Liquid'][i[1]] = float(y['average_price'])
+                                break
+                            except TypeError:
+                                dict2['Liquid'][i[1]] = None
                         else:
                             dict2['Liquid'][i[1]] = None
             else:
@@ -442,16 +441,21 @@ def checkprice(url, coinsdict):
             for i in coinsdict.items():
                 for y in site_json:
                     if i[0].lower() == y:
-                        dict2['Wazirx'][i[1]] = round(float(site_json[y]['usdt']), 7)
-                        break
+                        try:
+                            dict2['Wazirx'][i[1]] = round(float(site_json[y]['usdt']), 7)
+                            break
+                        except KeyError:
+                            dict2['Wazirx'][i[1]] = None
                     else:
                         dict2['Wazirx'][i[1]] = None
         else:
             print("WRONG URL")
+    else:
+        print("Url doesn't match")
 
 
 def run():
-    coinmarket(50)
+    coinmarket(100)
     threadd(dict, coins)
     j = json.dumps(dict2)
     with open("../spatialArbitrage.json", "w+") as f:
@@ -459,6 +463,6 @@ def run():
     j=json.dumps(dict3)
     with open("../triangulArarbitrage.json","w+") as f:
         f.write(j)
-    time.sleep(10)
+    time.sleep(7)
     run()
 run()

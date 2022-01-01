@@ -36,23 +36,6 @@
             -In triangular arbitrage prices changes in a quick time.Investor should realy quick.
             <br><br>
             -In triangular arbitrage investor convert his money 4 times this mean investor pay fees 4 times.For an advice in Binance investor should consider to profit>0.7
-            <div> <br> <br>
-                Binance-Malta <br>
-                Bitfinex-Hong Kong <br>
-                Bithumb-South Korea <br>
-                Bitstampt-Luxembourg <br>
-                Bittrex-USA <br>
-                Bybit-Virgin Islands <br>
-                Crypto.com-Hong Kong <br>
-                Coinbase-USA <br>
-                FTX-Hong Kong <br>
-                Gate-China <br>
-                Huobi-China <br>
-                Kucoin-China <br>
-                Mexc-The Seychelles <br>
-                Okex-China <br>
-                WazirX-India
-            </div>
         </div>
     </div>
 </div>
