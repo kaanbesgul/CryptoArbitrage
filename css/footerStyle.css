@@ -1,0 +1,11 @@
+footer{
+
+    font-family: 'Gemunu Libre', sans-serif;
+}
+footer a{
+    color: white;
+}
+footer a:hover{
+    color: yellowgreen;
+    text-decoration: none;
+}

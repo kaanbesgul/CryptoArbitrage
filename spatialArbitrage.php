@@ -5,19 +5,15 @@
         <tbody id="arbitrage"></tbody>
     </table>
 </div>
-<script src="js/spatialv2.js"></script>
+<script src="js/spatial.js"></script>
 
 <script>
     function myFunction(e) {
+        $(e).toggleClass('bg-dark');
+
         var x=$(e).parent().siblings().each(function(){
             $(this).toggleClass("invisible");
         })
-        
-
-        /*
-        $("tbody tr").each(function () {
-            $("td:eq(" + e + ")", this).toggleClass("invisible");
-        })*/
     }
 </script>
 

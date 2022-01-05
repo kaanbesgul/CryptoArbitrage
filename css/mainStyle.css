@@ -1,0 +1,37 @@
+.back{
+    background: linear-gradient(104.35deg,#e3f2ff 0,#f8f8f8 30.73%,#d6ffe0 72.4%,#d1ffdd 100%);
+}
+
+.main-div{
+    min-height: 600px;
+    font-size: 35px;
+}
+
+.btn2{
+    font-size: 25px !important;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    background-color:#00ff00;
+    overflow: hidden;
+    border: none;
+    outline: none !important;
+    transition: 0.2s ;
+}
+.btn2:hover{
+    cursor: pointer;
+    color:white !important;
+    background: #00FF00;
+    box-shadow: 0 0 10px #00FF00,0 0 40px #00FF00,0 0 8px #00FF00;
+}
+.second-parag{
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 25px;
+}
+.third-parag{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 35px;
+}
+.third-parag a:hover{
+    text-decoration: none;
+}

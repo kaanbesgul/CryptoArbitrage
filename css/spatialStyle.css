@@ -33,7 +33,7 @@
 #table td{ 
     border: 1px solid black;
 }
-
+/* Hide/Show Button style*/
 .but{
     background-color: white;
     float: right;
@@ -41,4 +41,7 @@
     margin: 5px 5px ;
     width: 15px;
     height: 15px;
+}
+.but:hover{
+    cursor: pointer;
 }

@@ -1,0 +1,59 @@
+.donate{
+    font-family: 'Gemunu Libre', sans-serif;
+    background: linear-gradient(104.35deg,#FFE333 0,#FFBB33 30.73%,#FF8F33 72.4%,#FF5733 100%);
+    font-size: 20px;
+}
+.donate button:hover{
+    cursor: pointer;
+}
+.donate button{
+    outline: none;
+    background: none;
+    border:none;
+}
+.ref{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 35px;
+}
+.ref img{
+    width: 50px;
+    height: 50px;
+}
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltips .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltips .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+  
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}

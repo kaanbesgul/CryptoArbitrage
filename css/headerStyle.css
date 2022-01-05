@@ -1,0 +1,20 @@
+.navbarr{
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 20px;
+}
+
+.tip-button {
+    width: 200px;
+    height: 60px;
+    background-size: 100%;
+    background-image: url('../images/1_pay_mm_off.png');
+    cursor: pointer;
+  }
+  
+  .tip-button:hover {
+    background-image: url('../images/1_pay_mm_over.png');
+  }
+  
+  .tip-button:active {
+    background-image: url('../images/1_pay_mm_off.png');
+  }

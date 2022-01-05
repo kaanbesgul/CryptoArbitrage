@@ -21,7 +21,12 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/spatialStyle.css">
+  <link rel="stylesheet" href="css/donateStyle.css">
+  <link rel="stylesheet" href="css/footerStyle.css">
+  <link rel="stylesheet" href="css/headerStyle.css">
+  <link rel="stylesheet" href="css/mainStyle.css">
   <title>Crypto Arbitrage</title>
 </head>
 
